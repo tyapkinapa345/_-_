@@ -1,0 +1,15 @@
+Практическое задание
+1. Реализовать запросы к удаленному серверу по протоколу HTTP с использованием утилит telnet, curl к следующим ресурсам:
+заходим в виртуальную машину, открываем терминал и начинаем:
+
+sudo apt-get update
+sudo apt-get install telnet curl
+sudo telnet mgpu.ru 80 
+
+** После строки "Escape character is '^]'" вставляем сразу строки, не дожидаясь ответа системы:
+GET /HTTP/1.1
+Host: mgpu.ru
+
+curl -v http://www.mgpu.ru/
+curl -v https://bmstu.ru/ 
+curl -v https://cbr.ru/
