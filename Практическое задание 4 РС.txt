@@ -1,0 +1,16 @@
+Определить сходимость SWIM, интервалы конвергенции (указать процент конвергенции, при котором график имеет наибольшее отклонение от гладкой кривой) компьютерной распределенной сети при следующих входных параметрах:
+GOSSIP FANOUT -10, 5, 3 nodes.
+GOSSIP INTERVAL – 0.1
+NODES = 50, 100
+PACKET LOSS – 10%, 50%.
+
+
+Открываем VScode - терминал
+sudo apt-get update
+sudo apt-get install -y python3 python3-pip
+sudo apt-get install -y python3-flask python3-cryptography
+sudo apt-get install python3-matplotlib
+python3 exec4.py
+
+
+exec4.py - находится в репозитории
