@@ -1,0 +1,14 @@
+2. Реализовать рассылку сообщений с помощью IP Multicast. На примере файлов socket_multicast_sender.py и socket_multicast_receiver.py реализовать рассылку сообщений.
+Материалы для подготовки размещены на ресурсе
+
+Открываем 2 окна терминала VScode (можно не открывать виртуальную машину)
+
+1. python socket_multicast_receiver.py
+
+2. python socket_multicast_sender.py
+python socket_multicast_sender.py
+python socket_multicast_sender.py
+
+В первом будут отображаться действия второго.
+netsh interface ip show joins - проверка, что мультикаст работает в вашей системе
+
