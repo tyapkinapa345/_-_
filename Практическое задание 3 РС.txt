@@ -1,0 +1,32 @@
+Реализовать механизмы безопасности в распределенной системе с использованием сертификатов X.509 для аутентификации. Создайте распределенную систему, состоящую из:
+-	Сервера распределенной системы.
+-	координатора распределенной системы.
+-	одного клиента распределенной системы HTTPS.
+-	одного клиента распределенной системы HTTP.
+
+Открываем VScode
+sudo apt-get update
+sudo apt-get install -y python3 python3-pip
+sudo apt-get install -y python3-flask python3-cryptography
+sudo apt-get install -y openssl
+openssl req -x509 -newkey rsa:4096 -keyout ca_key.pem -out ca_cert.pem -days 365 -nodes
+openssl req -newkey rsa:4096 -keyout server_key.pem -out server_req.pem -nodes
+openssl x509 -req -in server_req.pem -CA ca_cert.pem -CAkey ca_key.pem -CAcreateserial -out server_cert.pem -days 365
+openssl req -newkey rsa:4096 -keyout client_key.pem -out client_req.pem -nodes
+openssl x509 -req -in client_req.pem -CA ca_cert.pem -CAkey ca_key.pem -CAcreateserial -out client_cert.pem -days 365
+ip a
+cd /home/devops/Downloads/lw_05
+openssl genrsa -out server_key.pe 2048
+openssl req -new -x509 -key server_key.pem -out server-cert.pem -days 365
+
+повторяем те же действия в новом параллельном окне.
+
+первое окно: 
+python3 server.py
+
+второе окно и наблюдам за ним: 
+python3 coordinator.py
+
+тетье окно: 
+python3 client.py
+python3 client2.py
