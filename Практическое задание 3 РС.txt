@@ -33,4 +33,5 @@ python3 coordinator.py
 тетье окно: 
 python3 client.py
 python3 client2.py
+curl http://localhost:8000/api/data
 
