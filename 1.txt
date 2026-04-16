@@ -1,133 +1,15 @@
-docker exec -it support_bot_db mysql -u botuser -pbotpass123 support_bot_db
+docker compose version
 
+docker --version
 
+docker compose up
 
-docker compose up -d 
-запустить приложение и базу 
-docker compose ps 
-проверить, что контейнеры работают 
-docker compose logs app 
-посмотреть логи приложения 
-docker compose logs -f app 
-смотреть логи в реальном времени 
-docker compose down 
-остановить контейнеры 
-docker compose up --build -d 
-пересобрать и заново запустить (если меняли код) 
-docker compose down -v 
-полностью удалить контейнеры и базу (если проблемы) 
-curl http://localhost:3000 
-проверить, отвечает ли сервер 
-открыть в браузере 
-http://localhost:3000 
-запустить интерфейс 
-curl -X POST http://localhost:3000/message -H "Content-Type: application/json" -d 
-'{"client_name":"Тест","message_text":"Проверка"}' 
-проверка отправки сообщения без интерфейса 
-cat logs/messages.log 
-проверить, записываются ли обращения в лог 
-docker exec -it support_bot_db mysql -u botuser -pbotpass123 support_bot_db 
-подключиться к базе 
-SELECT * FROM messages; 
-посмотреть сохраненные обращения 
-exit; 
-выйти из базы 
-curl http://localhost:3000/stats 
-проверить статистику обращений 
-минимальный запуск после включения ВМ: 
-cd ~/task_5 
-docker compose up -d
+docker compose logs web
 
+docker compose exec web python manage.py migrate
 
+docker compose exec web python manage.py createsuperuser
 
+docker compose exec web python manage.py shell
 
-
-dev@dev-vm:~/Downloads/ekzamen/ticket_7$ docker exec -it support_bot_db mysql -u botuser -pbotpass123 support_bot_db
-Error response from daemon: No such container: support_bot_db
-dev@dev-vm:~/Downloads/ekzamen/ticket_7$ docker compose up -d
-[+] up 10/12
- ⠋ Image mysql:8.0 [⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿] 232.3MB / 232.3MB Pulling                                                   36.1s
-[+] Building 65.8s (13/13) FINISHED                                                                               
- => [internal] load local bake definitions                                                                   0.0s
- => => reading from stdin 522B                                                                               0.0s
- => [internal] load build definition from Dockerfile                                                         0.0s
- => => transferring dockerfile: 190B                                                                         0.0s
- => [internal] load metadata for docker.io/library/node:20                                                   1.8s
- => [internal] load .dockerignore                                                                            0.0s
- => => transferring context: 2B                                                                              0.0s
- => [1/6] FROM docker.io/library/node:20@sha256:8789e1e0752d81088a085689c04fdb7a5b16e8102e353118a4b049bbf0  54.0s
- => => resolve docker.io/library/node:20@sha256:8789e1e0752d81088a085689c04fdb7a5b16e8102e353118a4b049bbf05  0.0s
- => => sha256:b1bcedabf0893b08350bd401996425703c9a5757f19d4195b1a7ec8a20d9e5e1 2.49kB / 2.49kB               0.0s
- => => sha256:c150dd3f5fc91eabd1818cc30298a4a956782621583cadfd369c4d327584008e 48.49MB / 48.49MB            17.9s
- => => sha256:c2c3414b1d6b49c54c305584faac46aad75c67644cf4f8495e8145206d28e416 24.04MB / 24.04MB            12.3s
- => => sha256:de73ef470b7b271fede6f98a4c8376971bd059ce04ebc13b9f86e34e534b89ae 64.40MB / 64.40MB             9.4s
- => => sha256:8789e1e0752d81088a085689c04fdb7a5b16e8102e353118a4b049bbf05db8ac 6.41kB / 6.41kB               0.0s
- => => sha256:a2db3dc481fe5b5cd06925a3c4e320033703a11ace271d0a458e520bd26ba348 6.75kB / 6.75kB               0.0s
- => => sha256:b267853a2602be02c651d45a79ece242837985d07267fe166ad1109a4b3baa39 211.53MB / 211.53MB          35.7s
- => => sha256:554bab0bf8e5b53f09a0b73144389589485162c1a270f241691da6bbf0a767b0 3.33kB / 3.33kB              12.7s
- => => sha256:e6275fd2e2fd87e39f7d3644c466343b3c2a1deaecef95ec488142c29c584f48 48.62MB / 48.62MB            23.5s
- => => sha256:8480aa1086a2f1a42d463009429e1c37cf48cae44717697d6a893f569ac2bc9b 1.25MB / 1.25MB              19.1s
- => => extracting sha256:c150dd3f5fc91eabd1818cc30298a4a956782621583cadfd369c4d327584008e                    5.0s
- => => sha256:0d4319bae870e712c65946b52ec793126221cfdbd25f0bd2b616f8ca0ecd86b1 450B / 450B                  19.5s
- => => extracting sha256:c2c3414b1d6b49c54c305584faac46aad75c67644cf4f8495e8145206d28e416                    1.9s
- => => extracting sha256:de73ef470b7b271fede6f98a4c8376971bd059ce04ebc13b9f86e34e534b89ae                    6.2s
- => => extracting sha256:b267853a2602be02c651d45a79ece242837985d07267fe166ad1109a4b3baa39                   13.2s
- => => extracting sha256:554bab0bf8e5b53f09a0b73144389589485162c1a270f241691da6bbf0a767b0                    0.0s
- => => extracting sha256:e6275fd2e2fd87e39f7d3644c466343b3c2a1deaecef95ec488142c29c584f48                    4.5s
- => => extracting sha256:8480aa1086a2f1a42d463009429e1c37cf48cae44717697d6a893f569ac2bc9b                    0.1s
- => => extracting sha256:0d4319bae870e712c65946b52ec793126221cfdbd25f0bd2b616f8ca0ecd86b1                    0.0s
- => [internal] load build context                                                                            0.0s
- => => transferring context: 9.24kB                                                                          0.0s
- => [2/6] WORKDIR /usr/src/app                                                                               0.4s
- => [3/6] COPY package.json ./                                                                               0.0s
- => [4/6] RUN npm install                                                                                    8.6s
- => [5/6] COPY . .                                                                                           0.1s
- => [6/6] RUN mkdir -p /usr/src/app/logs                                                                     0.2s
- => exporting to image                                                                                       0.3s
- => => exporting layers                                                                                      0.3s
- => => writing image sha256:760c2fadd58c8fa581165c34e3c4ad196fdb1cd611e9d256da60567d920f08f7                 0.0s
-[+] up 17/17g to docker.io/library/ticket_7-app                                                              0.0s
- ✔ Image mysql:8.0           Pulled                                                                          36.1s
- ✔ Image ticket_7-app        Built                                                                           65.9s
- ✔ Network ticket_7_default  Created                                                                         0.0s
- ✔ Volume ticket_7_db_data   Created                                                                         0.0s
- ✔ Container support_bot_db  Created                                                                         0.0s
- ✔ Container support_bot_app Created                                                                         0.0s
-dev@dev-vm:~/Downloads/ekzamen/ticket_7$ ^[[200~docker compose ps
-docker: command not found
-dev@dev-vm:~/Downloads/ekzamen/ticket_7$ ~docker compose ps
-Command '~docker' not found, did you mean:
-  command 'docker' from snap docker (28.4.0)
-  command 'docker' from deb docker.io (29.1.3-0ubuntu3~22.04.1)
-  command 'docker' from deb podman-docker (3.4.4+ds1-1ubuntu1.22.04.3)
-  command 'kdocker' from deb kdocker (5.3-1)
-See 'snap info <snapname>' for additional versions.
-dev@dev-vm:~/Downloads/ekzamen/ticket_7$ docker compose ps
-NAME              IMAGE          COMMAND                  SERVICE   CREATED          STATUS          PORTS
-support_bot_app   ticket_7-app   "docker-entrypoint.s…"   app       22 seconds ago   Up 21 seconds   0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp
-support_bot_db    mysql:8.0      "docker-entrypoint.s…"   db        22 seconds ago   Up 21 seconds   0.0.0.0:3306->3306/tcp, [::]:3306->3306/tcp, 33060/tcp
-dev@dev-vm:~/Downloads/ekzamen/ticket_7$ docker compose logs app
-support_bot_app  | 
-support_bot_app  | > support-bot@1.0.0 start
-support_bot_app  | > node server.js
-support_bot_app  | 
-support_bot_app  | Ошибка подключения к MySQL: connect ECONNREFUSED 172.23.0.2:3306
-support_bot_app  | Сервер запущен на порту 3000
-dev@dev-vm:~/Downloads/ekzamen/ticket_7$ ^C
-dev@dev-vm:~/Downloads/ekzamen/ticket_7$ docker compose logs -f app 
-support_bot_app  | 
-support_bot_app  | > support-bot@1.0.0 start
-support_bot_app  | > node server.js
-support_bot_app  | 
-support_bot_app  | Ошибка подключения к MySQL: connect ECONNREFUSED 172.23.0.2:3306
-support_bot_app  | Сервер запущен на порту 3000
-support_bot_app  | GET /
-support_bot_app  | GET /style.css
-support_bot_app  | GET /script.js
-support_bot_app  | GET /favicon.ico
-support_bot_app  | POST /message
-support_bot_app  | Тело запроса: { client_name: 'TEPE3A', message_text: 'Как изменить тариф?' }
-support_bot_app  | GET /stats
-^C
-dev@dev-vm:~/Downloads/ekzamen/ticket_7$ ^C
-dev@dev-vm:~/Downloads/ekzamen/ticket_7$ 
+docker compose down
