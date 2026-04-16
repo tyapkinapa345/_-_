@@ -136,3 +136,21 @@ dev@dev-vm:~/Downloads/dba/rel/postgresql$ sudo docker compose ps
 NAME         IMAGE                   COMMAND                  SERVICE    CREATED         STATUS         PORTS
 pgadmin      dpage/pgadmin4:latest   "/entrypoint.sh"         pgadmin    6 minutes ago   Up 6 minutes   0.0.0.0:80->80/tcp, [::]:80->80/tcp, 443/tcp
 postgres16   postgres:16             "docker-entrypoint.s…"   postgres   6 minutes ago   Up 6 minutes   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp
+
+
+
+dev@dev-vm:~/Downloads/dba/rel/postgresql$ curl -I http://localhost
+HTTP/1.1 302 FOUND
+Server: gunicorn
+Date: Thu, 16 Apr 2026 18:37:30 GMT
+Connection: keep-alive
+Content-Type: text/html; charset=utf-8
+Content-Length: 213
+Location: /login?next=/
+Vary: Accept-Encoding
+X-Frame-Options: SAMEORIGIN
+Content-Security-Policy: default-src ws: http: data: blob: 'unsafe-inline' 'unsafe-eval';
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cross-Origin-Opener-Policy: same-origin
+Set-Cookie: pga4_session=bfb18165-6056-4056-bb08-7ffe72fe0605!jFQGkOGSEDyscFSReMLid0wGF4rZ47QSn8WmrL51YZI=; Expires=Fri, 17 Apr 2026 18:37:30 GMT; HttpOnly; Path=/; SameSite=Lax
