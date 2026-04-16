@@ -13,48 +13,34 @@ docker compose exec web python manage.py createsuperuser
 docker compose exec web python manage.py shell
 
 docker compose down
-2026/04/17 00:09:14 - Table output 2.0 - distribution activated
-2026/04/17 00:09:14 - Table output 2.0 - Starting allocation of buffers & new threads...
-2026/04/17 00:09:14 - Table output 2.0 - Step info: nrinput=1 nroutput=0
-2026/04/17 00:09:14 - Table output 2.0 - !BaseStep.Log.GotPreviousStep!
-2026/04/17 00:09:14 - Table output 2.0 - input rel is 1:1
-2026/04/17 00:09:14 - Table output 2.0 - Found input rowset [Get system info 2.0 - Table output 2.0]
-2026/04/17 00:09:14 - Table output 2.0 - Finished dispatching
-2026/04/17 00:09:14 - Table output 2.0 - Released server socket on port 0
-2026/04/17 00:09:14 - 2 - New database connection defined
-2026/04/17 00:09:15 - Table output 2.0 - Connected to database [2] (commit=1000)
-2026/04/17 00:09:15 - 2 - Auto commit off
-2026/04/17 00:09:15 - Table output 2.0 - Starting to run...
-2026/04/17 00:09:17 - Table output 2.0 - Prepared statement : INSERT INTO mgpu_ico_etl_16.target_products (category, avg_price, calculated_at) VALUES ( ?,  ?,  ?)
-2026/04/17 00:09:17 - Table output 2.0 - ERROR (version 9.4.0.0-343, build 0.0 from 2022-11-08 07.50.27 by buildguy) : Unexpected batch update error committing the database connection.
-2026/04/17 00:09:17 - Table output 2.0 - ERROR (version 9.4.0.0-343, build 0.0 from 2022-11-08 07.50.27 by buildguy) : org.pentaho.di.core.exception.KettleDatabaseBatchException: 
-2026/04/17 00:09:17 - Table output 2.0 - Error updating batch
-2026/04/17 00:09:17 - Table output 2.0 - Unknown column 'avg_price' in 'field list'
-2026/04/17 00:09:17 - Table output 2.0 - 
-2026/04/17 00:09:17 - Table output 2.0 - 	at org.pentaho.di.core.database.Database.createKettleDatabaseBatchException(Database.java:1440)
-2026/04/17 00:09:17 - Table output 2.0 - 	at org.pentaho.di.core.database.Database.emptyAndCommit(Database.java:1429)
-2026/04/17 00:09:17 - Table output 2.0 - 	at org.pentaho.di.trans.steps.tableoutput.TableOutput.dispose(TableOutput.java:590)
-2026/04/17 00:09:17 - Table output 2.0 - 	at org.pentaho.di.trans.step.RunThread.run(RunThread.java:97)
-2026/04/17 00:09:17 - Table output 2.0 - 	at java.base/java.lang.Thread.run(Thread.java:829)
-2026/04/17 00:09:17 - Table output 2.0 - Caused by: java.sql.BatchUpdateException: Unknown column 'avg_price' in 'field list'
-2026/04/17 00:09:17 - Table output 2.0 - 	at jdk.internal.reflect.GeneratedConstructorAccessor102.newInstance(Unknown Source)
-2026/04/17 00:09:17 - Table output 2.0 - 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-2026/04/17 00:09:17 - Table output 2.0 - 	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-2026/04/17 00:09:17 - Table output 2.0 - 	at com.mysql.cj.util.Util.handleNewInstance(Util.java:192)
-2026/04/17 00:09:17 - Table output 2.0 - 	at com.mysql.cj.util.Util.getInstance(Util.java:167)
-2026/04/17 00:09:17 - Table output 2.0 - 	at com.mysql.cj.util.Util.getInstance(Util.java:174)
-2026/04/17 00:09:17 - Table output 2.0 - 	at com.mysql.cj.jdbc.exceptions.SQLError.createBatchUpdateException(SQLError.java:224)
-2026/04/17 00:09:17 - Table output 2.0 - 	at com.mysql.cj.jdbc.ClientPreparedStatement.executeBatchSerially(ClientPreparedStatement.java:853)
-2026/04/17 00:09:17 - Table output 2.0 - 	at com.mysql.cj.jdbc.ClientPreparedStatement.executeBatchInternal(ClientPreparedStatement.java:435)
-2026/04/17 00:09:17 - Table output 2.0 - 	at com.mysql.cj.jdbc.StatementImpl.executeBatch(StatementImpl.java:800)
-2026/04/17 00:09:17 - Table output 2.0 - 	at org.pentaho.di.core.database.Database.emptyAndCommit(Database.java:1416)
-2026/04/17 00:09:17 - Table output 2.0 - 	... 3 more
-2026/04/17 00:09:17 - Table output 2.0 - Caused by: java.sql.SQLSyntaxErrorException: Unknown column 'avg_price' in 'field list'
-2026/04/17 00:09:17 - Table output 2.0 - 	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
-2026/04/17 00:09:17 - Table output 2.0 - 	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-2026/04/17 00:09:17 - Table output 2.0 - 	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953)
-2026/04/17 00:09:17 - Table output 2.0 - 	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1098)
-2026/04/17 00:09:17 - Table output 2.0 - 	at com.mysql.cj.jdbc.ClientPreparedStatement.executeBatchSerially(ClientPreparedStatement.java:832)
-2026/04/17 00:09:17 - Table output 2.0 - 	... 6 more
-2026/04/17 00:09:17 - 2 - Connection to database closed!
-2026/04/17 00:09:17 - Table output 2.0 - Finished processing (I=0, O=0, R=10, W=0, U=0, E=1)
+
+
+
+
+
+2026/04/17 00:14:15 - Insert / update.0 - distribution activated
+2026/04/17 00:14:15 - Insert / update.0 - Starting allocation of buffers & new threads...
+2026/04/17 00:14:15 - Insert / update.0 - Step info: nrinput=1 nroutput=1
+2026/04/17 00:14:15 - Insert / update.0 - !BaseStep.Log.GotPreviousStep!
+2026/04/17 00:14:15 - Insert / update.0 - input rel is 1:1
+2026/04/17 00:14:15 - Insert / update.0 - Found input rowset [Get system info.0 - Insert / update.0]
+2026/04/17 00:14:15 - Insert / update.0 - output rel. is  1:1
+2026/04/17 00:14:15 - Insert / update.0 - Found output rowset [Insert / update.0 - Sort rows.0]
+2026/04/17 00:14:15 - Insert / update.0 - Finished dispatching
+2026/04/17 00:14:15 - Insert / update.0 - Released server socket on port 0
+2026/04/17 00:14:15 - 2 - New database connection defined
+2026/04/17 00:14:15 - 2 - Auto commit off
+2026/04/17 00:14:15 - Insert / update.0 - Starting to run...
+2026/04/17 00:14:15 - Insert / update.0 - Setting preparedStatement to [SELECT name, category, price, stock_quantity, supplier_id, last_updated FROM target_products WHERE  ( ( id = ?  ) ) ]
+2026/04/17 00:14:15 - 2 - Preparing statement: 
+2026/04/17 00:14:15 - 2 - INSERT INTO target_products (name, category, price, stock_quantity, supplier_id, last_updated) VALUES ( ?,  ?,  ?,  ?,  ?,  ?)
+2026/04/17 00:14:15 - Insert / update.0 - Setting update preparedStatement to [UPDATE target_products
+2026/04/17 00:14:15 - Insert / update.0 - SET name = ?
+2026/04/17 00:14:15 - Insert / update.0 - ,   category = ?
+2026/04/17 00:14:15 - Insert / update.0 - ,   price = ?
+2026/04/17 00:14:15 - Insert / update.0 - ,   stock_quantity = ?
+2026/04/17 00:14:15 - Insert / update.0 - ,   supplier_id = ?
+2026/04/17 00:14:15 - Insert / update.0 - ,   last_updated = ?
+2026/04/17 00:14:15 - Insert / update.0 - WHERE  ( ( id = ?  ) ) ]
+2026/04/17 00:14:17 - 2 - Connection to database closed!
+2026/04/17 00:14:17 - Insert / update.0 - Finished processing (I=111, O=102, R=111, W=111, U=9, E=0)
