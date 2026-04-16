@@ -22,3 +22,5 @@ db.sales.insertMany([
   { productName: "ASUS Vivobook", category: "Ноутбуки", quantity: 2, price: 50000, totalAmount: 100000, saleDate: new Date(2025, 2, 15) },
   { productName: "iPhone 15", category: "Смартфоны", quantity: 1, price: 80000, totalAmount: 80000, saleDate: new Date(2025, 2, 20) }
 ]);
+
+http://localhost:5000/api/stats/monthly?year=2025&month=3
