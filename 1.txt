@@ -1,0 +1,35 @@
+docker compose up -d 
+запустить приложение и базу 
+docker compose ps 
+проверить, что контейнеры работают 
+docker compose logs app 
+посмотреть логи приложения 
+docker compose logs -f app 
+смотреть логи в реальном времени 
+docker compose down 
+остановить контейнеры 
+docker compose up --build -d 
+пересобрать и заново запустить (если меняли код) 
+docker compose down -v 
+полностью удалить контейнеры и базу (если проблемы) 
+curl http://localhost:3000 
+проверить, отвечает ли сервер 
+открыть в браузере 
+http://localhost:3000 
+запустить интерфейс 
+curl -X POST http://localhost:3000/message -H "Content-Type: application/json" -d 
+'{"client_name":"Тест","message_text":"Проверка"}' 
+проверка отправки сообщения без интерфейса 
+cat logs/messages.log 
+проверить, записываются ли обращения в лог 
+docker exec -it support_bot_db mysql -u botuser -pbotpass123 support_bot_db 
+подключиться к базе 
+SELECT * FROM messages; 
+посмотреть сохраненные обращения 
+exit; 
+выйти из базы 
+curl http://localhost:3000/stats 
+проверить статистику обращений 
+минимальный запуск после включения ВМ: 
+cd ~/task_5 
+docker compose up -d
