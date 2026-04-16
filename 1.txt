@@ -13,99 +13,36 @@ docker compose exec web python manage.py createsuperuser
 docker compose exec web python manage.py shell
 
 docker compose down
-2026/04/16 22:34:36 - Write to log 4.0 - Finished processing (I=0, O=0, R=290, W=289, U=0, E=0)
-2026/04/16 22:34:36 - Write to log.0 - Finished processing (I=0, O=0, R=97, W=96, U=0, E=0)
-2026/04/16 22:34:36 - Table output.0 - Finished processing (I=0, O=0, R=0, W=0, U=0, E=0)
-2026/04/16 22:34:36 - Write to log 5.0 - Finished processing (I=0, O=0, R=152, W=151, U=0, E=0)
-2026/04/16 22:34:36 - Write to log 2.0 - Finished processing (I=0, O=0, R=104, W=103, U=0, E=0)
-2026/04/16 22:34:36 - 1 - Connection to database closed!
-2026/04/16 22:34:36 - Table output 2.0 - Finished processing (I=0, O=0, R=1, W=0, U=0, E=1)
-2026/04/16 22:34:36 - Transformation 15 - Transformation detected one or more steps with errors.
-2026/04/16 22:34:36 - Transformation 15 - Transformation is killing the other steps!
-2026/04/16 22:34:41 - Table output 4.0 - ERROR (version 9.4.0.0-343, build 0.0 from 2022-11-08 07.50.27 by buildguy) : Unexpected batch update error committing the database connection.
-2026/04/16 22:34:41 - Table output 4.0 - ERROR (version 9.4.0.0-343, build 0.0 from 2022-11-08 07.50.27 by buildguy) : org.pentaho.di.core.exception.KettleDatabaseBatchException: 
-2026/04/16 22:34:41 - Table output 4.0 - Error updating batch
-2026/04/16 22:34:41 - Table output 4.0 - Duplicate entry 'FUR-TA-10001539-568.73' for key 'returns_analysis.PRIMARY'
-2026/04/16 22:34:41 - Table output 4.0 - 
-2026/04/16 22:34:41 - Table output 4.0 - 	at org.pentaho.di.core.database.Database.createKettleDatabaseBatchException(Database.java:1440)
-2026/04/16 22:34:41 - Table output 4.0 - 	at org.pentaho.di.core.database.Database.emptyAndCommit(Database.java:1429)
-2026/04/16 22:34:41 - Table output 4.0 - 	at org.pentaho.di.trans.steps.tableoutput.TableOutput.dispose(TableOutput.java:590)
-2026/04/16 22:34:41 - Table output 4.0 - 	at org.pentaho.di.trans.step.RunThread.run(RunThread.java:97)
-2026/04/16 22:34:41 - Table output 4.0 - 	at java.base/java.lang.Thread.run(Thread.java:829)
-2026/04/16 22:34:41 - Table output 4.0 - Caused by: java.sql.BatchUpdateException: Duplicate entry 'FUR-TA-10001539-568.73' for key 'returns_analysis.PRIMARY'
-2026/04/16 22:34:41 - Table output 4.0 - 	at jdk.internal.reflect.GeneratedConstructorAccessor102.newInstance(Unknown Source)
-2026/04/16 22:34:41 - Table output 4.0 - 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-2026/04/16 22:34:41 - Table output 4.0 - 	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-2026/04/16 22:34:41 - Table output 4.0 - 	at com.mysql.cj.util.Util.handleNewInstance(Util.java:192)
-2026/04/16 22:34:41 - Table output 4.0 - 	at com.mysql.cj.util.Util.getInstance(Util.java:167)
-2026/04/16 22:34:41 - Table output 4.0 - 	at com.mysql.cj.util.Util.getInstance(Util.java:174)
-2026/04/16 22:34:41 - Table output 4.0 - 	at com.mysql.cj.jdbc.exceptions.SQLError.createBatchUpdateException(SQLError.java:224)
-2026/04/16 22:34:41 - Table output 4.0 - 	at com.mysql.cj.jdbc.ServerPreparedStatement.executeBatchSerially(ServerPreparedStatement.java:385)
-2026/04/16 22:34:41 - Table output 4.0 - 	at com.mysql.cj.jdbc.ClientPreparedStatement.executeBatchInternal(ClientPreparedStatement.java:435)
-2026/04/16 22:34:41 - Table output 4.0 - 	at com.mysql.cj.jdbc.StatementImpl.executeBatch(StatementImpl.java:800)
-2026/04/16 22:34:41 - Table output 4.0 - 	at org.pentaho.di.core.database.Database.emptyAndCommit(Database.java:1416)
-2026/04/16 22:34:41 - Table output 4.0 - 	... 3 more
-2026/04/16 22:34:41 - Table output 4.0 - Caused by: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'FUR-TA-10001539-568.73' for key 'returns_analysis.PRIMARY'
-2026/04/16 22:34:41 - Table output 4.0 - 	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:117)
-2026/04/16 22:34:41 - Table output 4.0 - 	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-2026/04/16 22:34:41 - Table output 4.0 - 	at com.mysql.cj.jdbc.ServerPreparedStatement.serverExecute(ServerPreparedStatement.java:634)
-2026/04/16 22:34:41 - Table output 4.0 - 	at com.mysql.cj.jdbc.ServerPreparedStatement.executeInternal(ServerPreparedStatement.java:418)
-2026/04/16 22:34:41 - Table output 4.0 - 	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1098)
-2026/04/16 22:34:41 - Table output 4.0 - 	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1046)
-2026/04/16 22:34:41 - Table output 4.0 - 	at com.mysql.cj.jdbc.ServerPreparedStatement.executeBatchSerially(ServerPreparedStatement.java:357)
-2026/04/16 22:34:41 - Table output 4.0 - 	... 6 more
-2026/04/16 22:34:41 - 1 - Connection to database closed!
-2026/04/16 22:34:41 - Table output 4.0 - Finished processing (I=0, O=0, R=799, W=0, U=0, E=1)
-2026/04/16 22:34:41 - Transformation 15 - Transformation detected one or more steps with errors.
-2026/04/16 22:34:41 - Transformation 15 - Transformation is killing the other steps!
-2026/04/16 22:34:42 - Table output 3.0 - ERROR (version 9.4.0.0-343, build 0.0 from 2022-11-08 07.50.27 by buildguy) : Because of an error, this step can't continue:
-2026/04/16 22:34:42 - Table output 3.0 - ERROR (version 9.4.0.0-343, build 0.0 from 2022-11-08 07.50.27 by buildguy) : org.pentaho.di.core.exception.KettleException: 
-2026/04/16 22:34:42 - Table output 3.0 - Error batch inserting rows into table [new_clients].
-2026/04/16 22:34:42 - Table output 3.0 - Errors encountered (first 10):
-2026/04/16 22:34:42 - Table output 3.0 - 
-2026/04/16 22:34:42 - Table output 3.0 - 
-2026/04/16 22:34:42 - Table output 3.0 - Error updating batch
-2026/04/16 22:34:42 - Table output 3.0 - Duplicate entry 'MH-17785' for key 'new_clients.PRIMARY'
-2026/04/16 22:34:42 - Table output 3.0 - 
-2026/04/16 22:34:42 - Table output 3.0 - 
-2026/04/16 22:34:42 - Table output 3.0 - 	at org.pentaho.di.trans.steps.tableoutput.TableOutput.writeToTable(TableOutput.java:348)
-2026/04/16 22:34:42 - Table output 3.0 - 	at org.pentaho.di.trans.steps.tableoutput.TableOutput.processRow(TableOutput.java:125)
-2026/04/16 22:34:42 - Table output 3.0 - 	at org.pentaho.di.trans.step.RunThread.run(RunThread.java:62)
-2026/04/16 22:34:42 - Table output 3.0 - 	at java.base/java.lang.Thread.run(Thread.java:829)
-2026/04/16 22:34:42 - Table output 3.0 - Caused by: org.pentaho.di.core.exception.KettleDatabaseBatchException: 
-2026/04/16 22:34:42 - Table output 3.0 - Error updating batch
-2026/04/16 22:34:42 - Table output 3.0 - Duplicate entry 'MH-17785' for key 'new_clients.PRIMARY'
-2026/04/16 22:34:42 - Table output 3.0 - 
-2026/04/16 22:34:42 - Table output 3.0 - 	at org.pentaho.di.core.database.Database.createKettleDatabaseBatchException(Database.java:1440)
-2026/04/16 22:34:42 - Table output 3.0 - 	at org.pentaho.di.trans.steps.tableoutput.TableOutput.writeToTable(TableOutput.java:295)
-2026/04/16 22:34:42 - Table output 3.0 - 	... 3 more
-2026/04/16 22:34:42 - Table output 3.0 - Caused by: java.sql.BatchUpdateException: Duplicate entry 'MH-17785' for key 'new_clients.PRIMARY'
-2026/04/16 22:34:42 - Table output 3.0 - 	at jdk.internal.reflect.GeneratedConstructorAccessor102.newInstance(Unknown Source)
-2026/04/16 22:34:42 - Table output 3.0 - 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-2026/04/16 22:34:42 - Table output 3.0 - 	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-2026/04/16 22:34:42 - Table output 3.0 - 	at com.mysql.cj.util.Util.handleNewInstance(Util.java:192)
-2026/04/16 22:34:42 - Table output 3.0 - 	at com.mysql.cj.util.Util.getInstance(Util.java:167)
-2026/04/16 22:34:42 - Table output 3.0 - 	at com.mysql.cj.util.Util.getInstance(Util.java:174)
-2026/04/16 22:34:42 - Table output 3.0 - 	at com.mysql.cj.jdbc.exceptions.SQLError.createBatchUpdateException(SQLError.java:224)
-2026/04/16 22:34:42 - Table output 3.0 - 	at com.mysql.cj.jdbc.ServerPreparedStatement.executeBatchSerially(ServerPreparedStatement.java:385)
-2026/04/16 22:34:42 - Table output 3.0 - 	at com.mysql.cj.jdbc.ClientPreparedStatement.executeBatchInternal(ClientPreparedStatement.java:435)
-2026/04/16 22:34:42 - Table output 3.0 - 	at com.mysql.cj.jdbc.StatementImpl.executeBatch(StatementImpl.java:800)
-2026/04/16 22:34:42 - Table output 3.0 - 	at org.pentaho.di.trans.steps.tableoutput.TableOutput.writeToTable(TableOutput.java:291)
-2026/04/16 22:34:42 - Table output 3.0 - 	... 3 more
-2026/04/16 22:34:42 - Table output 3.0 - Caused by: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'MH-17785' for key 'new_clients.PRIMARY'
-2026/04/16 22:34:42 - Table output 3.0 - 	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:117)
-2026/04/16 22:34:42 - Table output 3.0 - 	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-2026/04/16 22:34:42 - Table output 3.0 - 	at com.mysql.cj.jdbc.ServerPreparedStatement.serverExecute(ServerPreparedStatement.java:634)
-2026/04/16 22:34:42 - Table output 3.0 - 	at com.mysql.cj.jdbc.ServerPreparedStatement.executeInternal(ServerPreparedStatement.java:418)
-2026/04/16 22:34:42 - Table output 3.0 - 	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1098)
-2026/04/16 22:34:42 - Table output 3.0 - 	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1046)
-2026/04/16 22:34:42 - Table output 3.0 - 	at com.mysql.cj.jdbc.ServerPreparedStatement.executeBatchSerially(ServerPreparedStatement.java:357)
-2026/04/16 22:34:42 - Table output 3.0 - 	... 6 more
-2026/04/16 22:34:42 - 1 - Connection to database closed!
-2026/04/16 22:34:42 - Table output 3.0 - Finished processing (I=0, O=999, R=1000, W=0, U=0, E=1)
-2026/04/16 22:34:42 - Transformation 15 - ERROR (version 9.4.0.0-343, build 0.0 from 2022-11-08 07.50.27 by buildguy) : Errors detected!
-2026/04/16 22:34:42 - Spoon - The transformation has finished!!
-2026/04/16 22:34:42 - Transformation 15 - ERROR (version 9.4.0.0-343, build 0.0 from 2022-11-08 07.50.27 by buildguy) : Errors detected!
-2026/04/16 22:34:42 - Transformation 15 - ERROR (version 9.4.0.0-343, build 0.0 from 2022-11-08 07.50.27 by buildguy) : Errors detected!
-2026/04/16 22:34:42 - Transformation 15 - Transformation detected one or more steps with errors.
-2026/04/16 22:34:42 - Transformation 15 - Transformation is killing the other steps!
+2026/04/16 22:37:24 - Table output 4.0 - ERROR (version 9.4.0.0-343, build 0.0 from 2022-11-08 07.50.27 by buildguy) : Unexpected batch update error committing the database connection.
+2026/04/16 22:37:24 - Table output 4.0 - ERROR (version 9.4.0.0-343, build 0.0 from 2022-11-08 07.50.27 by buildguy) : org.pentaho.di.core.exception.KettleDatabaseBatchException: 
+2026/04/16 22:37:24 - Table output 4.0 - Error updating batch
+2026/04/16 22:37:24 - Table output 4.0 - Data truncation: Data too long for column 'product_name' at row 1
+2026/04/16 22:37:24 - Table output 4.0 - 
+2026/04/16 22:37:24 - Table output 4.0 - 	at org.pentaho.di.core.database.Database.createKettleDatabaseBatchException(Database.java:1440)
+2026/04/16 22:37:24 - Table output 4.0 - 	at org.pentaho.di.core.database.Database.emptyAndCommit(Database.java:1429)
+2026/04/16 22:37:24 - Table output 4.0 - 	at org.pentaho.di.trans.steps.tableoutput.TableOutput.dispose(TableOutput.java:590)
+2026/04/16 22:37:24 - Table output 4.0 - 	at org.pentaho.di.trans.step.RunThread.run(RunThread.java:97)
+2026/04/16 22:37:24 - Table output 4.0 - 	at java.base/java.lang.Thread.run(Thread.java:829)
+2026/04/16 22:37:24 - Table output 4.0 - Caused by: java.sql.BatchUpdateException: Data truncation: Data too long for column 'product_name' at row 1
+2026/04/16 22:37:24 - Table output 4.0 - 	at jdk.internal.reflect.GeneratedConstructorAccessor102.newInstance(Unknown Source)
+2026/04/16 22:37:24 - Table output 4.0 - 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+2026/04/16 22:37:24 - Table output 4.0 - 	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+2026/04/16 22:37:24 - Table output 4.0 - 	at com.mysql.cj.util.Util.handleNewInstance(Util.java:192)
+2026/04/16 22:37:24 - Table output 4.0 - 	at com.mysql.cj.util.Util.getInstance(Util.java:167)
+2026/04/16 22:37:24 - Table output 4.0 - 	at com.mysql.cj.util.Util.getInstance(Util.java:174)
+2026/04/16 22:37:24 - Table output 4.0 - 	at com.mysql.cj.jdbc.exceptions.SQLError.createBatchUpdateException(SQLError.java:224)
+2026/04/16 22:37:24 - Table output 4.0 - 	at com.mysql.cj.jdbc.ServerPreparedStatement.executeBatchSerially(ServerPreparedStatement.java:385)
+2026/04/16 22:37:24 - Table output 4.0 - 	at com.mysql.cj.jdbc.ClientPreparedStatement.executeBatchInternal(ClientPreparedStatement.java:435)
+2026/04/16 22:37:24 - Table output 4.0 - 	at com.mysql.cj.jdbc.StatementImpl.executeBatch(StatementImpl.java:800)
+2026/04/16 22:37:24 - Table output 4.0 - 	at org.pentaho.di.core.database.Database.emptyAndCommit(Database.java:1416)
+2026/04/16 22:37:24 - Table output 4.0 - 	... 3 more
+2026/04/16 22:37:24 - Table output 4.0 - Caused by: com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long for column 'product_name' at row 1
+2026/04/16 22:37:24 - Table output 4.0 - 	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:104)
+2026/04/16 22:37:24 - Table output 4.0 - 	at com.mysql.cj.jdbc.ServerPreparedStatement.serverExecute(ServerPreparedStatement.java:634)
+2026/04/16 22:37:24 - Table output 4.0 - 	at com.mysql.cj.jdbc.ServerPreparedStatement.executeInternal(ServerPreparedStatement.java:418)
+2026/04/16 22:37:24 - Table output 4.0 - 	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1098)
+2026/04/16 22:37:24 - Table output 4.0 - 	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1046)
+2026/04/16 22:37:24 - Table output 4.0 - 	at com.mysql.cj.jdbc.ServerPreparedStatement.executeBatchSerially(ServerPreparedStatement.java:357)
+2026/04/16 22:37:24 - Table output 4.0 - 	... 6 more
+2026/04/16 22:37:24 - 1 - Connection to database closed!
+2026/04/16 22:37:24 - Table output 4.0 - Finished processing (I=0, O=0, R=799, W=0, U=0, E=1)
