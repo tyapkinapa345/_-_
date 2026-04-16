@@ -1,3 +1,7 @@
+docker exec -it support_bot_db mysql -u botuser -pbotpass123 support_bot_db
+
+
+
 docker compose up -d 
 запустить приложение и базу 
 docker compose ps 
