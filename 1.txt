@@ -24,3 +24,106 @@ db.sales.insertMany([
 ]);
 
 http://localhost:5000/api/stats/monthly?year=2025&month=3
+
+
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres16
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: post1616!
+      POSTGRES_DB: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_MULTIPLE_DATABASES: superstore
+      POSTGRES_ADMIN_USER: admin
+      POSTGRES_ADMIN_PASSWORD: admin1617!
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_:/var/lib/postgresql/data
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./pg_hba.conf:/etc/postgresql/pg_hba.conf
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    networks:
+      - postgres_network
+  
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin1617!
+    ports:
+      - "80:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - postgres_network
+
+networks:
+  postgres_network:
+    driver: bridge
+
+volumes:
+  postgres_:
+  pgadmin_data:
+
+#Для подключения через DBeaver:
+
+#Host: localhost
+#Port: 5432
+#Database: superstore
+#Username: admin
+#Password: admin1617!
+
+#if need ip for pgadmin
+# sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres16
+
+
+
+# Подключение под postgres
+# sudo docker compose exec postgres psql -U postgres -c "\du"
+# sudo docker compose exec postgres psql -U postgres -c "\l"
+
+# Проверка подключения под admin
+# sudo docker compose exec postgres psql -U admin -d superstore
+
+
+# Удаляем старые контейнеры если есть
+# sudo docker compose down -v
+
+
+# Запускаем
+# sudo docker compose up -d
+
+
+
+# Статус контейнера
+# sudo docker compose ps
+
+# Проверка логов
+# sudo docker compose logs
+
+# Проверка пользователей и баз
+# sudo docker compose exec postgres psql -U postgres -c "\du"
+# sudo docker compose exec postgres psql -U postgres -c "\l"
+
+# Остановка
+# sudo docker compose stop
+
+# Запуск
+# sudo docker compose start
+
+# Перезапуск
+# sudo docker compose restart
+
+# Удаление с сохранением данных
+# sudo docker compose down
+
+# Удаление с удалением данных
+# sudo docker compose down -v
