@@ -15,142 +15,86 @@ docker compose exec web python manage.py shell
 docker compose down
 
 
+У вас нет таблиц `customers` и `products`. Их нужно создать перед вставкой данных. Вот подходящие структуры для ваших `INSERT`-запросов:
 
-docker exec -it sales_mongo mongosh
-use sales  # или имя вашей БД
-db.sales.insertMany([
-  { productName: "ASUS Vivobook", category: "Ноутбуки", quantity: 2, price: 50000, totalAmount: 100000, saleDate: new Date(2025, 2, 15) },
-  { productName: "iPhone 15", category: "Смартфоны", quantity: 1, price: 80000, totalAmount: 80000, saleDate: new Date(2025, 2, 20) }
-]);
+## 1. Создайте таблицу `customers`
+```sql
+CREATE TABLE customers (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    email VARCHAR(255) UNIQUE,
+    phone VARCHAR(50),
+    registration_date DATE
+);
+```
 
-http://localhost:5000/api/stats/monthly?year=2025&month=3
+## 2. Создайте таблицу `products`
+```sql
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    category VARCHAR(100),
+    price DECIMAL(10,2),
+    stock_quantity INTEGER,
+    supplier_id INTEGER
+);
+```
 
+## 3. Затем выполните ваши `INSERT`-запросы
 
+### Вставка клиентов (5000 записей)
+```sql
+INSERT INTO customers (first_name, last_name, email, phone, registration_date)
+SELECT
+    first_name,
+    last_name,
+    lower(first_name) || '.' || lower(last_name) || floor(random() * 10000)::text || '@' ||
+    (array['gmail.com', 'yandex.ru', 'mail.ru', 'example.com', 'bk.ru'])[floor(random()*5)+1] AS email,
+    '+7 ' || (100 + floor(random()*900))::text || ' ' ||
+    (100 + floor(random()*900))::text || '-' ||
+    (10 + floor(random()*90))::text || '-' ||
+    (10 + floor(random()*90))::text AS phone,
+    CURRENT_DATE - (random() * 1095)::int * interval '1 day' AS registration_date
+FROM (
+    SELECT
+        (array['Александр','Алексей','Андрей','Артём','Владимир','Дмитрий','Евгений','Иван','Максим','Михаил','Николай','Павел','Роман','Сергей','Юрий',
+                'Анна','Елена','Мария','Ольга','Татьяна','Наталья','Ирина','Светлана','Екатерина','Юлия']) [floor(random()*25)+1] AS first_name,
+        (array['Иванов','Смирнов','Кузнецов','Попов','Васильев','Петров','Соколов','Михайлов','Новиков','Фёдоров','Морозов','Волков','Алексеев','Лебедев','Семёнов',
+                'Козлов','Михайлова','Новикова','Морозова','Волкова','Алексеева','Лебедева','Семёнова','Егорова','Павлова']) [floor(random()*25)+1] AS last_name
+    FROM generate_series(1, 5000)
+) AS names
+ON CONFLICT (email) DO NOTHING;
+```
 
-services:
-  postgres:
-    image: postgres:16
-    container_name: postgres16
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: post1616!
-      POSTGRES_DB: postgres
-      PGDATA: /var/lib/postgresql/data/pgdata
-      POSTGRES_MULTIPLE_DATABASES: superstore
-      POSTGRES_ADMIN_USER: admin
-      POSTGRES_ADMIN_PASSWORD: admin1617!
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_:/var/lib/postgresql/data
-      - ./postgresql.conf:/etc/postgresql/postgresql.conf
-      - ./pg_hba.conf:/etc/postgresql/pg_hba.conf
-      - ./init-scripts:/docker-entrypoint-initdb.d
-    command: postgres -c config_file=/etc/postgresql/postgresql.conf
-    networks:
-      - postgres_network
-  
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    container_name: pgadmin
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin1617!
-    ports:
-      - "80:80"
-    volumes:
-      - pgadmin_data:/var/lib/pgadmin
-    networks:
-      - postgres_network
+### Вставка продуктов (5000 записей)
+```sql
+INSERT INTO products (name, category, price, stock_quantity, supplier_id)
+SELECT
+    initcap((array['Ноутбук','Смартфон','Планшет','Монитор','Клавиатура','Мышь','Наушники','Колонки','Принтер','Сканер','Телевизор','Холодильник','Микроволновка','Чайник','Пылесос','Фен','Утюг','Стул','Стол','Диван','Кровать','Шкаф','Лампа','Часы','Сумка','Футболка','Джинсы','Кроссовки','Пальто','Шарф'])[floor(random()*30)+1])
+    || ' ' || (floor(random()*900)+100)::text,
+    (array['Электроника','Бытовая техника','Мебель','Одежда','Аксессуары','Спорт','Игрушки','Книги','Продукты','Косметика'])[floor(random()*10)+1],
+    round((random() * 49900 + 100)::numeric, 2),
+    floor(random() * 501)::int,
+    floor(random() * 100 + 1)::int
+FROM generate_series(1, 5000);
+```
 
-networks:
-  postgres_network:
-    driver: bridge
+## Как выполнить в вашем контейнере
 
-volumes:
-  postgres_:
-  pgadmin_data:
+Подключитесь к базе `st_200`:
+```bash
+docker exec -it postgres16 psql -U admin -d st_200
+```
+Если пользователь `admin` не владелец БД, используйте `-U postgres`.
 
-#Для подключения через DBeaver:
+Затем по очереди выполните `CREATE TABLE` и `INSERT`. Если таблицы уже существуют, сначала удалите их (`DROP TABLE IF EXISTS customers, products;`).
 
-#Host: localhost
-#Port: 5432
-#Database: superstore
-#Username: admin
-#Password: admin1617!
+После вставки проверьте количество записей:
+```sql
+SELECT COUNT(*) FROM customers;
+SELECT COUNT(*) FROM products;
+```
 
-#if need ip for pgadmin
-# sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres16
+Если при вставке возникнет ошибка «отношение не существует» — значит, таблицы всё ещё не созданы. Выполните CREATE сначала.
 
-
-
-# Подключение под postgres
-# sudo docker compose exec postgres psql -U postgres -c "\du"
-# sudo docker compose exec postgres psql -U postgres -c "\l"
-
-# Проверка подключения под admin
-# sudo docker compose exec postgres psql -U admin -d superstore
-
-
-# Удаляем старые контейнеры если есть
-# sudo docker compose down -v
-
-
-# Запускаем
-# sudo docker compose up -d
-
-
-
-# Статус контейнера
-# sudo docker compose ps
-
-# Проверка логов
-# sudo docker compose logs
-
-# Проверка пользователей и баз
-# sudo docker compose exec postgres psql -U postgres -c "\du"
-# sudo docker compose exec postgres psql -U postgres -c "\l"
-
-# Остановка
-# sudo docker compose stop
-
-# Запуск
-# sudo docker compose start
-
-# Перезапуск
-# sudo docker compose restart
-
-# Удаление с сохранением данных
-# sudo docker compose down
-
-# Удаление с удалением данных
-# sudo docker compose down -v
-
-
-
-
-
-dev@dev-vm:~/Downloads/dba/rel/postgresql$ sudo docker compose ps
-NAME         IMAGE                   COMMAND                  SERVICE    CREATED         STATUS         PORTS
-pgadmin      dpage/pgadmin4:latest   "/entrypoint.sh"         pgadmin    6 minutes ago   Up 6 minutes   0.0.0.0:80->80/tcp, [::]:80->80/tcp, 443/tcp
-postgres16   postgres:16             "docker-entrypoint.s…"   postgres   6 minutes ago   Up 6 minutes   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp
-
-
-
-dev@dev-vm:~/Downloads/dba/rel/postgresql$ curl -I http://localhost
-HTTP/1.1 302 FOUND
-Server: gunicorn
-Date: Thu, 16 Apr 2026 18:37:30 GMT
-Connection: keep-alive
-Content-Type: text/html; charset=utf-8
-Content-Length: 213
-Location: /login?next=/
-Vary: Accept-Encoding
-X-Frame-Options: SAMEORIGIN
-Content-Security-Policy: default-src ws: http: data: blob: 'unsafe-inline' 'unsafe-eval';
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cross-Origin-Opener-Policy: same-origin
-Set-Cookie: pga4_session=bfb18165-6056-4056-bb08-7ffe72fe0605!jFQGkOGSEDyscFSReMLid0wGF4rZ47QSn8WmrL51YZI=; Expires=Fri, 17 Apr 2026 18:37:30 GMT; HttpOnly; Path=/; SameSite=Lax
